@@ -16,6 +16,9 @@ public class Course
     public int Id { get; set; }
     public String Title { get; set; }
     public String Credits { get; set; }
+    public int InstructorId { get; set; }
+    
+    public Instructor Instructor { get; set; }
 }
 
 public class Enrollment
@@ -27,6 +30,15 @@ public class Enrollment
     
     public Student Student { get; set; }
     public Course Course { get; set; }
+}
+
+public class Instructor
+{
+    public int Id { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public DateTime HireDate { get; set; }
 }
 
 public class StudentManagementContext : DbContext
@@ -55,6 +67,11 @@ public class StudentManagementContext : DbContext
             .HasOne(e => e.Course)
             .WithMany()
             .HasForeignKey(e => e.CourseId); 
+        
+        modelBuilder.Entity<Course>()
+            .HasOne(c => c.Instructor)
+            .WithMany()
+            .HasForeignKey(c => c.InstructorId);
     }
 }
 

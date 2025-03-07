@@ -15,7 +15,7 @@ public class Course
 {
     public int Id { get; set; }
     public String Title { get; set; }
-    public String Credits { get; set; }
+    public decimal Credits { get; set; }
     public int InstructorId { get; set; }
     
     public Instructor Instructor { get; set; }

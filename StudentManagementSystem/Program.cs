@@ -41,11 +41,24 @@ public class Instructor
     public DateTime HireDate { get; set; }
 }
 
+public class Department
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Budget { get; set; }
+    public DateTime StartDate { get; set; }
+    public int? DepartmentHeadId { get; set; }
+    public Instructor DepartmentHead { get; set; }
+}
+
+
 public class StudentManagementContext : DbContext
 {
     public DbSet<Student> Students { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
+    public DbSet<Instructor> Instructors { get; set; }
+    public DbSet<Department> Departments { get; set; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -72,6 +85,12 @@ public class StudentManagementContext : DbContext
             .HasOne(c => c.Instructor)
             .WithMany()
             .HasForeignKey(c => c.InstructorId);
+        
+        modelBuilder.Entity<Department>()
+            .HasOne(d => d.DepartmentHead) 
+            .WithMany() 
+            .HasForeignKey(d => d.DepartmentHeadId)
+            .OnDelete(DeleteBehavior.SetNull); 
     }
 }
 

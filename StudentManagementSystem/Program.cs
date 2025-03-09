@@ -4,7 +4,9 @@ public class Student
 {
     public int Id { get; set; }
     public String FirstName { get; set; }
+    public String MiddleName { get; set; }
     public String LastName { get; set; }
+    public DateTime DateOfBirth { get; set; }
     public String Email { get; set; }
     public DateTime EnrollmentDate { get; set; }
 }
